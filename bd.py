@@ -1,0 +1,4 @@
+mangaPrecoBD = {}
+mangaEstoqueBD = {}
+clientesBD = {}
+carrinhoBD = {}
