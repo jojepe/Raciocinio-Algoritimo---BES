@@ -1,4 +1,3 @@
-mangaPrecoBD = {}
-mangaEstoqueBD = {}
+mangaBD = {}
 clientesBD = {}
 carrinhoBD = {}
