@@ -19,18 +19,6 @@ def rg_manga():
             break
 
 
-def buy_manga():
-    for k, v in bd.mangaEstoqueBD.items():
-        while True:
-            print(f"O manga {k} possui {v} cópias.")
-            if input("Deseja adicionar o mangá ao carrinho? (s/n) ") == "s":
-                print("Mangá colocado no carrinho com sucesso!")
-                bd.mangaEstoqueBD[k] -= 1
-                v -= 1
-            else:
-                break
-
-
 def list_manga():
     for k, v in bd.mangaBD.items():
         print(f"Mangá: {k}, " + str(len(v["Volumes"])) + " volumes  ----- R$" + str(v["Preço"]))
@@ -47,4 +35,28 @@ def rg_cliente():
         print(f"O cliente {nome} - CPF: {cpf},  Telefone: {telefone}, E-mail: {mail}, Endereço: {endereco} - foi adicionado com sucesso!")
         if input("Deseja adicionar mais um cliente? (s/n)") == "n":
             break
+
+
+def sch_manga():
+    while True:
+        entry = str(input("Insira o nome do Mangá a ser pesquisado: "))
+        if entry in bd.mangaBD:
+            print(f"{entry}")
+        else:
+            if input("O mangá " + str(entry) + " não foi encontrado! Deseja tentar novamente? (s/n)") == "n":
+                break
+
+
+def buy_manga():
+    while True:
+        entry = str(input("Insira o nome do Mangá a ser comprado: "))
+        if entry in bd.mangaBD:
+            print(f"{entry}")
+        else:
+            if input("O mangá " + str(entry) + " não foi encontrado! Deseja tentar novamente? (s/n)") == "n":
+                break
+        vol = int(input("Qual volume deseja comprar? "))
+        num = int(input("Quantas unidades deseja adicionar ao carinho? "))
+        bd.mangaBD.update()[entry]["Volumes"]["vol.1"][0] = 0
+        print(bd.mangaBD)
 
