@@ -1,4 +1,5 @@
 import bd
+import json
 
 
 def rg_manga():
@@ -38,13 +39,13 @@ def rg_cliente():
 
 
 def sch_manga():
-    while True:
-        entry = str(input("Insira o nome do Mangá a ser pesquisado: "))
+       while True:
+        entry = str(input("Digite o nome do Mangá a ser pesquisado: "))
         if entry in bd.mangaBD:
-            print(f"{entry}")
-        else:
-            if input("O mangá " + str(entry) + " não foi encontrado! Deseja tentar novamente? (s/n)") == "n":
-                break
+            print("Mangá encontrado!")
+            print(f"{entry}: {bd.mangaBD[entry]['Autor']}, {bd.mangaBD[entry]['Editora']}, R${(bd.mangaBD[entry]['Preço']):.2f} - "
+                  f"{len(bd.mangaBD[entry]['Volumes'])} volumes.")
+            break
 
 
 def buy_manga():
@@ -60,3 +61,27 @@ def buy_manga():
         bd.mangaBD.update()[entry]["Volumes"]["vol.1"][0] = 0
         print(bd.mangaBD)
 
+
+def salvar_bd():
+    bd_total = {
+        'manga': bd.mangaBD,
+        'clientes': bd.clientesBD,
+        'carrinho': bd.carrinhoBD
+
+    }
+    with open("bd.json", "w") as file:
+        json.dump(bd_total, file)
+
+
+def resgatar_bd():
+    with open('bd.json', 'r') as file:
+        try:
+            dados = json.load(file)
+        except:
+            return
+        if dados is not None:
+            bd.clientesBD = dados['clientes']
+            bd.mangaBD = dados['manga']
+            bd.carrinhoBD = dados['carrinho']
+
+            
